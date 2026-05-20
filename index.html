@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenText Identity Manager - BusiSoft Thailand</title>
+<link rel="icon" href="./bs-logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --brand: #2848ff;
+    --brand-dark: #0b2f77;
+    --brand-deep: #08224f;
+    --brand-sky: #00aeef;
+    --text: #192332;
+    --text-soft: #55657d;
+    --text-muted: #8391a4;
+    --surface: #ffffff;
+    --surface-soft: #f4f8fd;
+    --surface-alt: #ecf2fa;
+    --border: #dbe6f2;
+    --shadow: 0 24px 70px rgba(8, 34, 79, 0.08);
+    --shadow-soft: 0 14px 40px rgba(8, 34, 79, 0.08);
+    --radius-xl: 34px;
+    --radius-lg: 26px;
+    --radius-md: 20px;
+    --success: #09b976;
+    --amber: #f59e0b;
+    --danger: #ef4444;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Poppins', 'Noto Sans Thai', sans-serif;
+    font-size: 16px;
+    line-height: 1.85;
+    color: var(--text);
+    background:
+      radial-gradient(circle at top right, rgba(40, 72, 255, 0.08), transparent 18%),
+      linear-gradient(180deg, #f5f8fc 0%, #ffffff 11%, #ffffff 89%, #f4f7fb 100%);
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    backdrop-filter: blur(14px);
+    background: rgba(255, 255, 255, 0.92);
+    border-bottom: 1px solid rgba(40, 72, 255, 0.06);
+  }
+
+  .site-header__inner {
+    width: min(1240px, calc(100% - 36px));
+    margin: 0 auto;
+    min-height: 92px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .brand img {
+    width: 124px;
+    height: auto;
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: #262f3b;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .site-nav a {
+    position: relative;
+    padding: 6px 0;
+  }
+
+  .site-nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--brand), var(--brand-sky));
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.25s ease;
+  }
+
+  .site-nav a:hover::after,
+  .site-nav a.is-active::after {
+    transform: scaleX(1);
+  }
+
+  .site-lang {
+    padding: 12px 18px;
+    border-radius: 14px;
+    background: #f1f4f8;
+    color: #2d3748;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .page-shell {
+    padding: 24px 0 44px;
+  }
+
+  .hero,
+  section,
+  .cta-section {
+    width: min(1240px, calc(100% - 36px));
+    margin: 0 auto 34px;
+    padding: clamp(40px, 5vw, 78px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero,
+  section {
+    background: var(--surface);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow);
+  }
+
+  .hero > *,
+  section > *,
+  .cta-section > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.04fr) minmax(360px, 0.96fr);
+    align-items: center;
+    gap: clamp(26px, 4vw, 48px);
+    min-height: 680px;
+    background: linear-gradient(135deg, #eef3fb 0%, #f7fbff 58%, #ffffff 100%);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 410px;
+    height: 410px;
+    right: -74px;
+    top: 72px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(40, 72, 255, 0.2) 0%, rgba(40, 72, 255, 0.08) 55%, transparent 68%);
+    animation: floatGlow 11s ease-in-out infinite;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    left: -10%;
+    right: -10%;
+    bottom: -180px;
+    height: 290px;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 48%, transparent 72%);
+  }
+
+  @keyframes floatGlow {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(-22px, -16px, 0); }
+  }
+
+  .hero-content { max-width: 620px; }
+
+  .hero-badge,
+  .cta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(40, 72, 255, 0.14);
+    background: rgba(255, 255, 255, 0.84);
+    color: var(--brand);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    box-shadow: 0 8px 24px rgba(40, 72, 255, 0.08);
+  }
+
+  .hero-badge::before,
+  .cta-badge::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--brand-sky);
+    box-shadow: 0 0 0 4px rgba(0, 174, 239, 0.12);
+  }
+
+  .hero h1 {
+    font-size: clamp(42px, 5vw, 74px);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    font-weight: 700;
+    color: #141d2b;
+    margin-bottom: 22px;
+  }
+
+  .hero h1 .accent {
+    color: var(--brand);
+    display: inline-block;
+  }
+
+  .hero h1 .sub-line {
+    display: block;
+    margin-top: 18px;
+    font-size: clamp(16px, 1.8vw, 22px);
+    font-weight: 500;
+    color: var(--text-soft);
+    letter-spacing: -0.01em;
+  }
+
+  .hero-desc {
+    max-width: 58ch;
+    margin-bottom: 34px;
+    font-size: 17px;
+    color: var(--text-soft);
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .hero-stat {
+    padding: 18px 16px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(40, 72, 255, 0.08);
+    box-shadow: 0 12px 30px rgba(8, 34, 79, 0.08);
+  }
+
+  .hero-stat .num {
+    display: block;
+    margin-bottom: 10px;
+    font-size: clamp(30px, 2vw, 36px);
+    line-height: 1;
+    font-weight: 700;
+    color: var(--brand);
+  }
+
+  .hero-stat .label {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+
+  .hero-visual {
+    position: relative;
+    max-width: 540px;
+    width: 100%;
+    justify-self: end;
+  }
+
+  .hero-visual__frame {
+    position: relative;
+    z-index: 2;
+    padding: 26px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(40, 72, 255, 0.08);
+    box-shadow: 0 30px 70px rgba(8, 34, 79, 0.16);
+  }
+
+  .hero-shot {
+    border-radius: 22px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #fbfdff 0%, #eef4fb 100%);
+  }
+
+  .hero-shot img {
+    width: 100%;
+    height: auto;
+  }
+
+  .hero-media-row {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .hero-media-thumb {
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(40, 72, 255, 0.08);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  }
+
+  .hero-media-thumb img {
+    width: 100%;
+    height: 132px;
+    object-fit: cover;
+  }
+
+  .hero-photo {
+    position: absolute;
+    left: -56px;
+    bottom: -30px;
+    width: 210px;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 8px solid #ffffff;
+    box-shadow: 0 24px 44px rgba(8, 34, 79, 0.18);
+  }
+
+  section::before {
+    content: '';
+    position: absolute;
+    top: -130px;
+    right: -120px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(40, 72, 255, 0.1) 0%, transparent 70%);
+  }
+
+  #solution,
+  #features,
+  #industry,
+  #deployment {
+    background: linear-gradient(180deg, #eef4fb 0%, #f9fbfe 100%);
+  }
+
+  .section-head {
+    max-width: 770px;
+    margin-bottom: 42px;
+  }
+
+  .section-label {
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--brand);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    margin-bottom: 18px;
+    font-size: clamp(34px, 4vw, 56px);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    color: #182334;
+  }
+
+  .section-title-subline {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.76em;
+    letter-spacing: -0.02em;
+    color: #31445e;
+  }
+
+  .section-desc {
+    max-width: 65ch;
+    font-size: 17px;
+    color: var(--text-soft);
+  }
+
+  .challenges-grid,
+  .sol-features-grid,
+  .features-grid,
+  .architecture-grid,
+  .industry-grid,
+  .deploy-grid,
+  .cta-boxes-container {
+    display: grid;
+    gap: 22px;
+  }
+
+  .challenge-card,
+  .sol-feature,
+  .feature-card,
+  .architecture-card,
+  .benefit-item,
+  .industry-card,
+  .rs-item,
+  .deploy-card,
+  .cta-contact-box {
+    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease, background 0.28s ease;
+  }
+
+  .challenge-card:hover,
+  .sol-feature:hover,
+  .feature-card:hover,
+  .architecture-card:hover,
+  .benefit-item:hover,
+  .industry-card:hover,
+  .rs-item:hover,
+  .deploy-card:hover,
+  .cta-contact-box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(8, 34, 79, 0.12);
+  }
+
+  .challenge-card,
+  .sol-feature,
+  .feature-card,
+  .architecture-card,
+  .benefit-item,
+  .industry-card,
+  .rs-item,
+  .deploy-card {
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(40, 72, 255, 0.08);
+    box-shadow: var(--shadow-soft);
+    border-radius: var(--radius-lg);
+  }
+
+  .challenges-grid {
+    grid-template-columns: repeat(auto-fit, minmax(248px, 1fr));
+  }
+
+  .challenge-card {
+    padding: 26px 24px;
+  }
+
+  .challenge-card::before {
+    content: '';
+    display: block;
+    width: 62px;
+    height: 4px;
+    margin-bottom: 20px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--brand), var(--brand-sky));
+  }
+
+  .card-icon,
+  .architecture-icon,
+  .industry-card .ic-icon,
+  .deploy-card .dc-icon {
+    width: 56px;
+    height: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    background: linear-gradient(180deg, #ffffff 0%, #edf4ff 100%);
+    border: 1px solid rgba(40, 72, 255, 0.08);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+    margin-bottom: 16px;
+  }
+
+  .card-icon img,
+  .architecture-icon img,
+  .industry-card .ic-icon img,
+  .deploy-card .dc-icon img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .c-title,
+  .sf-title,
+  .fc-title,
+  .architecture-title,
+  .bi-title,
+  .ic-name,
+  .dc-title,
+  .sv-title,
+  .bm-title,
+  .rv-title,
+  .cta-title {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .c-title {
+    margin-bottom: 10px;
+    font-size: 22px;
+    color: var(--text);
+  }
+
+  .c-desc,
+  .sf-bullets li,
+  .fc-desc,
+  .architecture-desc,
+  .bi-desc,
+  .ic-scenario,
+  .ic-outcome,
+  .rs-item span,
+  .dc-desc,
+  .dc-ideal,
+  .lc-desc,
+  .bm-label,
+  .box-text {
+    font-size: 14px;
+    color: var(--text-soft);
+    line-height: 1.9;
+  }
+
+  .c-risk,
+  .fc-badge,
+  .compliance-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 14px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .risk-high {
+    background: rgba(239, 68, 68, 0.1);
+    color: #c13838;
+  }
+
+  .risk-med {
+    background: rgba(245, 158, 11, 0.12);
+    color: #b77400;
+  }
+
+  .solution-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.92fr);
+    gap: 24px;
+    align-items: start;
+  }
+
+  .sol-features-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .sol-feature.top-card { grid-column: span 2; }
+  .sol-feature.bottom-card { grid-column: span 3; }
+
+  .sol-feature {
+    padding: 24px;
+  }
+
+  .sf-header {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+
+  .sf-title,
+  .fc-title,
+  .architecture-title,
+  .bi-title,
+  .dc-title {
+    font-size: 20px;
+    color: var(--text);
+  }
+
+  .sf-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sf-bullets li {
+    position: relative;
+    padding-left: 18px;
+  }
+
+  .sf-bullets li::before {
+    content: '';
+    position: absolute;
+    top: 11px;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--brand);
+  }
+
+  .sol-visual,
+  .benefit-metrics,
+  .readiness-visual,
+  .cta-section {
+    background: linear-gradient(180deg, var(--brand-dark) 0%, var(--brand-deep) 100%);
+    color: #ffffff;
+  }
+
+  .sol-visual,
+  .benefit-metrics,
+  .readiness-visual {
+    position: sticky;
+    top: 24px;
+    padding: 28px;
+    border-radius: 28px;
+    border: 1px solid rgba(0, 174, 239, 0.18);
+    box-shadow: 0 24px 60px rgba(8, 34, 79, 0.24);
+    overflow: hidden;
+  }
+
+  .sol-visual::before,
+  .benefit-metrics::before,
+  .readiness-visual::before,
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: auto -90px -120px auto;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(40, 72, 255, 0.38) 0%, rgba(0, 174, 239, 0.1) 56%, transparent 72%);
+  }
+
+  .sv-title,
+  .bm-title,
+  .rv-title {
+    margin-bottom: 22px;
+    font-size: 20px;
+    color: #ffffff;
+  }
+
+  .lifecycle-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .lc-step {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .lc-step:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .lc-dot {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(0, 174, 239, 0.14);
+    border: 1px solid rgba(0, 174, 239, 0.48);
+    color: var(--brand-sky);
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .lc-title {
+    margin-bottom: 2px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .lc-desc,
+  .bm-label,
+  .rv-score-label {
+    color: rgba(255, 255, 255, 0.76);
+  }
+
+  .architecture-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .architecture-card {
+    padding: 26px 24px;
+  }
+
+  .architecture-title {
+    margin-bottom: 8px;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(auto-fit, minmax(268px, 1fr));
+  }
+
+  .feature-card {
+    padding: 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .feature-card .card-icon {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  .fc-badge {
+    background: rgba(0, 174, 239, 0.12);
+    color: var(--brand-dark);
+  }
+
+  .benefits-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+    gap: 24px;
+    align-items: start;
+  }
+
+  .benefit-items {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .benefit-item {
+    padding: 22px 24px;
+    display: grid;
+    grid-template-columns: 58px minmax(0, 1fr);
+    gap: 18px;
+    align-items: start;
+  }
+
+  .bi-num {
+    width: 58px;
+    height: 58px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #ffffff 0%, #edf4ff 100%);
+    border: 1px solid rgba(40, 72, 255, 0.08);
+    color: var(--brand);
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .bm-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .bm-item {
+    padding: 18px 16px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .bm-val {
+    display: block;
+    margin-bottom: 8px;
+    font-size: clamp(28px, 2vw, 36px);
+    line-height: 1;
+    font-weight: 700;
+    color: var(--brand-sky);
+  }
+
+  .compliance-row { margin-top: 22px; }
+
+  .compliance-title {
+    margin-bottom: 10px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.74);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .compliance-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .compliance-tag {
+    margin-top: 0;
+    background: rgba(9, 185, 118, 0.18);
+    border: 1px solid rgba(9, 185, 118, 0.36);
+    color: #4af0ae;
+  }
+
+  .industry-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .industry-card {
+    overflow: hidden;
+  }
+
+  .industry-card .ic-top {
+    padding: 24px;
+    background: linear-gradient(180deg, #103a86 0%, #0a2d6a 100%);
+  }
+
+  .industry-card .ic-icon {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .industry-card .ic-name {
+    font-size: 22px;
+    color: #ffffff;
+  }
+
+  .industry-card .ic-body {
+    padding: 22px 22px 24px;
+  }
+
+  .ic-scenario { margin-bottom: 12px; }
+
+  .ic-outcome {
+    display: flex;
+    gap: 8px;
+    color: var(--brand-dark);
+  }
+
+  .ic-outcome::before {
+    content: '\2713';
+    color: var(--brand-sky);
+    font-weight: 700;
+  }
+
+  .readiness-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+    gap: 24px;
+    align-items: start;
+  }
+
+  .readiness-signals {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .rs-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 18px 20px;
+  }
+
+  .rs-dot {
+    width: 10px;
+    height: 10px;
+    margin-top: 11px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--brand);
+    box-shadow: 0 0 0 6px rgba(40, 72, 255, 0.1);
+  }
+
+  .rv-scorecard {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .rv-score-label {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+
+  .rv-bar {
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+  }
+
+  .rv-fill {
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #f4a600, #ffc940);
+  }
+
+  .deploy-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .deploy-card {
+    padding: 28px;
+  }
+
+  .dc-ideal {
+    margin-top: 16px;
+    padding: 14px 15px;
+    border-radius: 16px;
+    background: #edf4fb;
+    color: var(--brand-dark);
+  }
+
+  .cta-section {
+    width: min(1240px, calc(100% - 36px));
+    padding: clamp(42px, 5vw, 72px);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 30px 74px rgba(8, 34, 79, 0.22);
+    text-align: center;
+  }
+
+  .cta-content {
+    max-width: 920px;
+    margin: 0 auto;
+  }
+
+  .cta-title {
+    margin-bottom: 16px;
+    font-size: clamp(38px, 4vw, 62px);
+    line-height: 1.18;
+    color: #ffffff;
+  }
+
+  .cta-title span { color: var(--brand-sky); }
+
+  .cta-desc {
+    margin-bottom: 30px;
+    font-size: 17px;
+    line-height: 1.9;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .cta-boxes-container {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .cta-contact-box {
+    min-height: 74px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 18px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .cta-contact-box:hover {
+    border-color: rgba(0, 174, 239, 0.46);
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .box-icon,
+  .line-icon-svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  .box-text {
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  .site-footer {
+    width: min(1240px, calc(100% - 36px));
+    margin: 0 auto;
+    padding: 42px clamp(24px, 4vw, 46px);
+    border-radius: var(--radius-xl);
+    background: #eef2f7;
+    border: 1px solid rgba(40, 72, 255, 0.06);
+  }
+
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) 0.9fr 0.9fr;
+    gap: 34px;
+    align-items: start;
+  }
+
+  .site-footer__brand img {
+    width: 120px;
+    margin-bottom: 14px;
+  }
+
+  .site-footer__brand p,
+  .site-footer li a {
+    color: #3d4d64;
+    font-size: 14px;
+    line-height: 1.9;
+  }
+
+  .site-footer h3 {
+    margin-bottom: 14px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #182334;
+  }
+
+  .site-footer ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .site-footer__social {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .site-footer__social a {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #ffffff;
+    color: var(--brand);
+    border: 1px solid rgba(40, 72, 255, 0.08);
+    transition: transform 0.24s ease, box-shadow 0.24s ease, background 0.24s ease, color 0.24s ease, border-color 0.24s ease;
+  }
+
+  .site-footer__social a:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, var(--brand) 0%, var(--brand-sky) 100%);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 16px 28px rgba(40, 72, 255, 0.22);
+  }
+
+  .site-footer__social svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+
+  .site-footer__bottom {
+    margin-top: 28px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(24, 35, 50, 0.12);
+    text-align: center;
+    font-size: 14px;
+    color: #4a586d;
+  }
+
+  @media (max-width: 1180px) {
+    .hero,
+    .solution-layout,
+    .benefits-layout,
+    .readiness-layout,
+    .site-footer__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-visual {
+      justify-self: start;
+      max-width: 620px;
+    }
+
+    .sol-visual,
+    .benefit-metrics,
+    .readiness-visual {
+      position: relative;
+      top: auto;
+    }
+  }
+
+  @media (max-width: 980px) {
+    .sol-features-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .sol-feature.top-card,
+    .sol-feature.bottom-card {
+      grid-column: span 1;
+    }
+
+    .hero-stats,
+    .cta-boxes-container,
+    .deploy-grid,
+    .bm-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .site-header__inner {
+      min-height: auto;
+      padding: 16px 0;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .site-nav {
+      gap: 18px;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .hero,
+    section,
+    .cta-section,
+    .site-footer {
+      width: min(100%, calc(100% - 22px));
+      margin-bottom: 18px;
+      padding: 32px 22px;
+      border-radius: 26px;
+    }
+
+    .page-shell {
+      padding-top: 16px;
+    }
+
+    .section-head {
+      margin-bottom: 28px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 8vw, 42px);
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 12vw, 54px);
+    }
+
+    .hero-stats,
+    .cta-boxes-container,
+    .deploy-grid,
+    .bm-grid,
+    .features-grid,
+    .industry-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .feature-card,
+    .benefit-item {
+      display: block;
+    }
+
+    .feature-card .card-icon,
+    .benefit-item .bi-num {
+      margin-bottom: 14px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .sol-features-grid,
+    .challenges-grid,
+    .architecture-grid,
+    .hero-media-row {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-photo {
+      position: relative;
+      left: auto;
+      bottom: auto;
+      width: 100%;
+      margin-top: 16px;
+    }
+
+    .hero::before {
+      width: 260px;
+      height: 260px;
+      right: -50px;
+      top: 54px;
+    }
+  }
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="https://busisoft.co.th/home/">
+      <img src="./bs-logo.png" alt="BusiSoft (Thailand) Co., Ltd.">
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="https://busisoft.co.th/home/">Home</a>
+      <a href="https://busisoft.co.th/about-us/">About Us</a>
+      <a href="https://busisoft.co.th/opentext-identity-manager/" class="is-active">Product</a>
+      <a href="https://busisoft.co.th/contact/">Contact</a>
+      <a href="#contact">Talk to Sales</a>
+    </nav>
+    <a class="site-lang" href="https://busisoft.co.th/home/">Thai</a>
+  </div>
+</header>
+
+<main class="page-shell">
+  <section class="hero" id="top">
+    <div class="hero-content">
+      <div class="hero-badge">Enterprise Identity &amp; Access Management (IAM)</div>
+      <h1>
+        OpenText<br>
+        <span class="accent">Identity Manager</span>
+        <span class="sub-line">Automated User Provisioning &amp; Access Control</span>
+      </h1>
+      <p class="hero-desc">
+        Manage user lifecycles precisely&mdash;from onboarding to offboarding. Ensure employees access only what they need, and revoke external access instantly in real-time.
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="num">60-80%</div>
+          <div class="label">Reduced IT Helpdesk Tasks</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">&lt;1 Min</div>
+          <div class="label">New Account Setup Time</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">100+</div>
+          <div class="label">Ready-to-Use Integrations</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-visual__frame">
+        <div class="hero-shot">
+          <img src="https://www.opentext.com/assets/images/products-solutions/product-details/opentext-image-lp-idm-en.png" alt="OpenText Identity Manager running on a computer" loading="eager">
+        </div>
+        <div class="hero-media-row">
+          <div class="hero-media-thumb">
+            <img src="https://www.opentext.com/assets/images/products-solutions/product-details/opentext-image-feature-3-identity-manager-448x252-en.png" alt="OpenText workflow automation visual" loading="lazy">
+          </div>
+          <div class="hero-media-thumb">
+            <img src="https://www.opentext.com/assets/images/products-solutions/product-details/opentext-image-feature-2-identity-manager-448x252-en.png" alt="OpenText access security visual" loading="lazy">
+          </div>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="https://www.opentext.com/assets/images/products-solutions/product-details/opentext-image-ov-cybersecurity-netiq-identity-manager-en.jpg" alt="OpenText identity management team visual" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section id="challenges">
+    <div class="section-head">
+      <div class="section-label">Common Enterprise Challenges</div>
+      <h2 class="section-title">Why Manual Identity Management<br>Creates Hidden Business Risks</h2>
+      <p class="section-desc">As your organization grows, manual access provisioning becomes a security risk and struggles to meet modern compliance standards.</p>
+    </div>
+
+    <div class="challenges-grid">
+      <div class="challenge-card">
+        <div class="card-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-protection-lock-shield-ico-72.svg" alt="Protection shield icon" loading="lazy"></div>
+        <div class="c-title">Orphaned Accounts</div>
+        <div class="c-desc">Former employee accounts left active create major vulnerabilities for hackers to steal corporate data easily.</div>
+        <span class="c-risk risk-high">High Risk</span>
+      </div>
+      <div class="challenge-card">
+        <div class="card-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-performance-gauge-speed-ico-72.svg" alt="Performance speed icon" loading="lazy"></div>
+        <div class="c-title">Slow Provisioning</div>
+        <div class="c-desc">Manual data entry delays onboarding, leaving new hires waiting days for account and system access.</div>
+        <span class="c-risk risk-med">Time Wasted</span>
+      </div>
+      <div class="challenge-card">
+        <div class="card-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-performance-integration-ico-72.svg" alt="Integration icon" loading="lazy"></div>
+        <div class="c-title">Manual IT Burden</div>
+        <div class="c-desc">IT engineers waste valuable time on repetitive tasks like password resets instead of core projects.</div>
+        <span class="c-risk risk-med">Resource Drain</span>
+      </div>
+      <div class="challenge-card">
+        <div class="card-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-document-common-file-text-check-ico-72.svg" alt="File audit icon" loading="lazy"></div>
+        <div class="c-title">Lack of Oversight</div>
+        <div class="c-desc">Without real-time visibility into access rights, annual security audits become a chaotic and complex process.</div>
+        <span class="c-risk risk-high">Hard to Audit</span>
+      </div>
+      <div class="challenge-card">
+        <div class="card-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-protection-lock-network-ico-72.svg" alt="Network security icon" loading="lazy"></div>
+        <div class="c-title">Compliance Risks</div>
+        <div class="c-desc">Without clear identity and access records, proving compliance with PDPA or ISO 27001 is difficult.</div>
+        <span class="c-risk risk-high">Rule Violation</span>
+      </div>
+      <div class="challenge-card">
+        <div class="card-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-protection-user-firewall-ico-72.svg" alt="User firewall icon" loading="lazy"></div>
+        <div class="c-title">Privilege Creep</div>
+        <div class="c-desc">Employees retain old access rights when changing roles, leading to excessive and unnecessary system privileges.</div>
+        <span class="c-risk risk-high">Insider Risk</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="solution">
+    <div class="section-head">
+      <div class="section-label">The Solution</div>
+      <h2 class="section-title">OpenText Identity Manager<br>Automate Your Manual Processes</h2>
+      <p class="section-desc">A centralized platform that manages, connects, and secures user identities, making your business safer and more agile.</p>
+    </div>
+
+    <div class="solution-layout">
+      <div class="sol-features-grid">
+        <div class="sol-feature top-card">
+          <div class="sf-header">
+            <div class="card-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-performance-integration-ico-72.svg" alt="Integration icon" loading="lazy"></div>
+            <div class="sf-title">Automated Access Provisioning</div>
+          </div>
+          <ul class="sf-bullets">
+            <li>Direct HR system integration</li>
+            <li>Auto-grant and revoke access</li>
+            <li>Fast and accurate execution</li>
+          </ul>
+        </div>
+
+        <div class="sol-feature top-card">
+          <div class="sf-header">
+            <div class="card-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-protection-user-firewall-ico-72.svg" alt="User firewall icon" loading="lazy"></div>
+            <div class="sf-title">Role-Based Access Control (RBAC)</div>
+          </div>
+          <ul class="sf-bullets">
+            <li>Define clear job roles</li>
+            <li>Control granular access rights</li>
+            <li>Auto-assign proper privileges</li>
+          </ul>
+        </div>
+
+        <div class="sol-feature top-card">
+          <div class="sf-header">
+            <div class="card-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-protection-lock-network-ico-72.svg" alt="Network lock icon" loading="lazy"></div>
+            <div class="sf-title">Self-Service Password Reset</div>
+          </div>
+          <ul class="sf-bullets">
+            <li>Reduce calls to IT support</li>
+            <li>Boost workplace productivity</li>
+            <li>Ensure secure account recovery</li>
+          </ul>
+        </div>
+
+        <div class="sol-feature bottom-card">
+          <div class="sf-header">
+            <div class="card-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-protection-lock-shield-ico-72.svg" alt="Shield icon" loading="lazy"></div>
+            <div class="sf-title">Prevent Internal Fraud Risks</div>
+          </div>
+          <ul class="sf-bullets">
+            <li>Centralized security oversight</li>
+            <li>Monitor and detect access</li>
+            <li>Maintain comprehensive logs</li>
+          </ul>
+        </div>
+
+        <div class="sol-feature bottom-card">
+          <div class="sf-header">
+            <div class="card-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-document-common-file-text-check-ico-72.svg" alt="File check icon" loading="lazy"></div>
+            <div class="sf-title">Security &amp; Audit Reporting</div>
+          </div>
+          <ul class="sf-bullets">
+            <li>Generate simple audit reports</li>
+            <li>Keep full historical records</li>
+            <li>Ensure regulatory compliance</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sol-visual">
+        <div class="sv-title">Automated Identity Lifecycle</div>
+        <div class="lifecycle-steps">
+          <div class="lc-step">
+            <div class="lc-dot">1</div>
+            <div class="lc-content">
+              <div class="lc-title">Onboarding</div>
+              <div class="lc-desc">Create accounts instantly in 60 seconds.</div>
+            </div>
+          </div>
+
+          <div class="lc-step">
+            <div class="lc-dot">2</div>
+            <div class="lc-content">
+              <div class="lc-title">Transition</div>
+              <div class="lc-desc">Auto-update new and remove old rights.</div>
+            </div>
+          </div>
+
+          <div class="lc-step">
+            <div class="lc-dot">3</div>
+            <div class="lc-content">
+              <div class="lc-title">Suspension</div>
+              <div class="lc-desc">Temporarily lock accounts for full security.</div>
+            </div>
+          </div>
+
+          <div class="lc-step">
+            <div class="lc-dot">4</div>
+            <div class="lc-content">
+              <div class="lc-title">Offboarding</div>
+              <div class="lc-desc">Revoke access across all systems instantly.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="architecture">
+    <div class="section-head">
+      <div class="section-label">Backend Architecture</div>
+      <h2 class="section-title">Connect Identities Across Platforms<br>for Secure Centralized Control</h2>
+      <p class="section-desc">Synchronizes access rights between On-Premises directories and modern SaaS cloud applications, ensuring consistent accounts everywhere.</p>
+    </div>
+
+    <div class="architecture-grid">
+      <div class="architecture-card">
+        <div class="architecture-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-document-common-file-text-check-ico-72.svg" alt="Identity vault icon" loading="lazy"></div>
+        <div class="architecture-title">Identity Vault</div>
+        <div class="architecture-desc">A highly secure central vault acting as the single source of truth for all employee identity data.</div>
+      </div>
+
+      <div class="architecture-card">
+        <div class="architecture-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-performance-integration-ico-72.svg" alt="Engine icon" loading="lazy"></div>
+        <div class="architecture-title">IDM Engine</div>
+        <div class="architecture-desc">The core engine processing access changes, instantly blocking or enabling accounts when employees change departments.</div>
+      </div>
+
+      <div class="architecture-card">
+        <div class="architecture-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-protection-lock-shield-ico-72.svg" alt="Governance shield icon" loading="lazy"></div>
+        <div class="architecture-title">Identity Governance</div>
+        <div class="architecture-desc">The governance layer enforcing policies, checking redundancies, and preventing access rights from violating corporate rules.</div>
+      </div>
+
+      <div class="architecture-card">
+        <div class="architecture-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-protection-lock-network-ico-72.svg" alt="Connected systems icon" loading="lazy"></div>
+        <div class="architecture-title">Connected Systems</div>
+        <div class="architecture-desc">Out-of-the-box connectors ready to integrate seamlessly with popular global IT applications and standard databases instantly.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="section-head">
+      <div class="section-label">Platform Highlights</div>
+      <h2 class="section-title">Key Enterprise Features<br>for Confident IT Operations</h2>
+      <p class="section-desc">Designed to simplify complex backend tasks, enhance security, and give your team time back to focus on core business growth.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="card-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-performance-integration-ico-72.svg" alt="Integration icon" loading="lazy"></div>
+        <div class="fc-body">
+          <div class="fc-title">Smart Integration</div>
+          <div class="fc-desc">Connect legacy systems with modern clouds seamlessly. Save IT budgets without replacing your existing infrastructure.</div>
+          <span class="fc-badge">Saves IT Budgets</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-performance-gauge-speed-ico-72.svg" alt="Speed icon" loading="lazy"></div>
+        <div class="fc-body">
+          <div class="fc-title">Automated Provisioning</div>
+          <div class="fc-desc">Link directly with HR data to instantly create, update, or delete accounts across apps without manual admin work.</div>
+          <span class="fc-badge">100% Admin Reduction</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-protection-user-firewall-ico-72.svg" alt="User firewall icon" loading="lazy"></div>
+        <div class="fc-body">
+          <div class="fc-title">Role-Based Access (RBAC)</div>
+          <div class="fc-desc">Assign rights based on job roles for easy, uniform control. Eliminate privilege creep when employees change positions internally.</div>
+          <span class="fc-badge">Accurate Job Rights</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-protection-lock-network-ico-72.svg" alt="Lock network icon" loading="lazy"></div>
+        <div class="fc-body">
+          <div class="fc-title">Self-Service Password Reset</div>
+          <div class="fc-desc">Empower staff to reset passwords or unlock IDs via a web portal, cutting IT helpdesk calls by up to 80%.</div>
+          <span class="fc-badge">Cuts Helpdesk 80%</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-document-common-file-text-check-ico-72.svg" alt="Console icon" loading="lazy"></div>
+        <div class="fc-body">
+          <div class="fc-title">Centralized Console</div>
+          <div class="fc-desc">A single control pane for admins to monitor account status, verify employee rights, and manage overall corporate security centrally.</div>
+          <span class="fc-badge">Single Control Point</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-protection-lock-shield-ico-72.svg" alt="Synchronization icon" loading="lazy"></div>
+        <div class="fc-body">
+          <div class="fc-title">Password Synchronization</div>
+          <div class="fc-desc">Keep employee passwords synced across all systems. Use one password to log into all apps, reducing daily login issues.</div>
+          <span class="fc-badge">One Unified Password</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-protection-lock-shield-ico-72.svg" alt="Shield icon" loading="lazy"></div>
+        <div class="fc-body">
+          <div class="fc-title">Segregation of Duties (SOD)</div>
+          <div class="fc-desc">Automatically detect and block conflicting access rights to prevent internal fraud opportunities right from the structural level easily.</div>
+          <span class="fc-badge">Stops Internal Fraud</span>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="card-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-document-common-file-text-check-ico-72.svg" alt="Compliance reporting icon" loading="lazy"></div>
+        <div class="fc-body">
+          <div class="fc-title">Compliance Reporting</div>
+          <div class="fc-desc">Automatically log security and access histories. Easily extract this data into detailed reports ready for instant auditor submission.</div>
+          <span class="fc-badge">Passes Audits Easily</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="benefits">
+    <div class="section-head">
+      <div class="section-label">Real Business Benefits</div>
+      <h2 class="section-title">Clear Business Outcomes<br>Visible from the Very First Week</h2>
+      <p class="section-desc">OpenText Identity Manager delivers undeniable value in cybersecurity, operational speed, and strict compliance with legal regulations.</p>
+    </div>
+
+    <div class="benefits-layout">
+      <div class="benefit-items">
+        <div class="benefit-item">
+          <div class="bi-num">01</div>
+          <div class="bi-content">
+            <div class="bi-title">New Hires Start Instantly, Zero Wait Time</div>
+            <div class="bi-desc">New employees access emails, cloud apps, and critical IT systems on day one, eliminating weeks of waiting for IT provisioning.</div>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="bi-num">02</div>
+          <div class="bi-content">
+            <div class="bi-title">Reduce IT Costs and Manual Workloads</div>
+            <div class="bi-desc">Automated provisioning and self-service resets eliminate repetitive tasks, freeing IT engineers to focus on strategic core system developments instead.</div>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="bi-num">03</div>
+          <div class="bi-content">
+            <div class="bi-title">Close Security Gaps, Revoke Access Instantly</div>
+            <div class="bi-desc">Upon resignation, the system revokes rights and deletes accounts across all platforms instantly, eliminating ghost accounts targeted by hackers.</div>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="bi-num">04</div>
+          <div class="bi-content">
+            <div class="bi-title">Ready for Audits at Any Given Time</div>
+            <div class="bi-desc">Immutable audit trails log all access changes securely, allowing your organization to generate auditor-ready reports without hunting for historical documents.</div>
+          </div>
+        </div>
+
+        <div class="benefit-item">
+          <div class="bi-num">05</div>
+          <div class="bi-content">
+            <div class="bi-title">Lay the Foundation for Zero Trust Security</div>
+            <div class="bi-desc">Enforce least-privilege access based strictly on job requirements, while allowing temporary, specialized access requests for critical operational tasks securely.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="benefit-metrics">
+        <div class="bm-title">System Performance Metrics</div>
+        <div class="bm-grid">
+          <div class="bm-item">
+            <span class="bm-val">60-80%</span>
+            <div class="bm-label">Reduction in IT helpdesk password-related tickets</div>
+          </div>
+          <div class="bm-item">
+            <span class="bm-val">&lt;60 Secs</span>
+            <div class="bm-label">Average time to provision new employee accounts</div>
+          </div>
+          <div class="bm-item">
+            <span class="bm-val">100%</span>
+            <div class="bm-label">Instant deletion of resigned accounts with immutable logs</div>
+          </div>
+          <div class="bm-item">
+            <span class="bm-val">100+</span>
+            <div class="bm-label">Out-of-the-box enterprise software integrations ready to use</div>
+          </div>
+        </div>
+
+        <div class="compliance-row">
+          <div class="compliance-title">Supported Global Standards &amp; Compliance</div>
+          <div class="compliance-tags">
+            <span class="compliance-tag">PDPA / GDPR Privacy</span>
+            <span class="compliance-tag">ISO/IEC 27001</span>
+            <span class="compliance-tag">SOX Framework</span>
+            <span class="compliance-tag">PCI-DSS Ready</span>
+            <span class="compliance-tag">HIPAA Standard</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="industry">
+    <div class="section-head">
+      <div class="section-label">Industry Expertise</div>
+      <h2 class="section-title">Meets Strict Requirements<br>of High-Security Industries</h2>
+      <p class="section-desc">Trusted by large enterprises worldwide to deliver maximum security, precision, and regulatory compliance.</p>
+    </div>
+
+    <div class="industry-grid">
+      <div class="industry-card">
+        <div class="ic-top">
+          <div class="ic-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-document-common-file-text-check-ico-72.svg" alt="Banking icon" loading="lazy"></div>
+          <div class="ic-name">Banking &amp; Finance</div>
+        </div>
+        <div class="ic-body">
+          <div class="ic-scenario">Control access rights for core and branch systems across thousands of employees, suppliers, and external auditors.</div>
+          <div class="ic-outcome">Pass strict regulatory audits while preventing internal fraud through automated Segregation of Duties (SOD) rules globally.</div>
+        </div>
+      </div>
+
+      <div class="industry-card">
+        <div class="ic-top">
+          <div class="ic-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-protection-lock-network-ico-72.svg" alt="Healthcare icon" loading="lazy"></div>
+          <div class="ic-name">Healthcare &amp; Hospitals</div>
+        </div>
+        <div class="ic-body">
+          <div class="ic-scenario">Restrict patient record access for doctors, nurses, and rotating staff based strictly on their real-time shifts.</div>
+          <div class="ic-outcome">Comply with global healthcare privacy laws and prevent external leakage of sensitive patient medical data effectively.</div>
+        </div>
+      </div>
+
+      <div class="industry-card">
+        <div class="ic-top">
+          <div class="ic-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-performance-integration-ico-72.svg" alt="Manufacturing icon" loading="lazy"></div>
+          <div class="ic-name">Manufacturing</div>
+        </div>
+        <div class="ic-body">
+          <div class="ic-scenario">Manage system logins (ERP/MES) for numerous shift workers and supply chain partners securely and highly efficiently.</div>
+          <div class="ic-outcome">Eliminate production delays caused by IT access waits and protect OT machinery from unauthorized external access.</div>
+        </div>
+      </div>
+
+      <div class="industry-card">
+        <div class="ic-top">
+          <div class="ic-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-protection-user-firewall-ico-72.svg" alt="Retail icon" loading="lazy"></div>
+          <div class="ic-name">Retail &amp; E-Commerce</div>
+        </div>
+        <div class="ic-body">
+          <div class="ic-scenario">Clearly separate and restrict system access between marketing teams, admins, and external logistics delivery partners efficiently.</div>
+          <div class="ic-outcome">Protect customer shopping behavior and personal data, ensuring full compliance with PCI-DSS payment security standards seamlessly.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="readiness">
+    <div class="section-head">
+      <div class="section-label">Check Your Readiness</div>
+      <h2 class="section-title">5 Warning Signs Your Company<br>Needs an Identity Manager Today</h2>
+      <p class="section-desc">If your current IT environment matches any of these signs, investing in Enterprise IAM is now a critical necessity.</p>
+    </div>
+
+    <div class="readiness-layout">
+      <div class="readiness-signals">
+        <div class="rs-item"><div class="rs-dot"></div><span>You have over 500 users, or your organization is rapidly expanding its workforce and external suppliers.</span></div>
+        <div class="rs-item"><div class="rs-dot"></div><span>Employees use multiple disconnected systems (ERP, CRM, M365), causing password fatigue and frequent reset requests.</span></div>
+        <div class="rs-item"><div class="rs-dot"></div><span>Recent security audits revealed critical vulnerabilities, such as active ghost accounts of former employees or partners.</span></div>
+        <div class="rs-item"><div class="rs-dot"></div><span>Your IT admins waste daily hours on manual tasks like password resets instead of core development.</span></div>
+        <div class="rs-item"><div class="rs-dot"></div><span>Your company is preparing for ISO 27001 certification or strictly enforcing PDPA/GDPR data privacy regulations.</span></div>
+      </div>
+
+      <div class="readiness-visual">
+        <div class="rv-title">System Readiness Comparison Index</div>
+        <div class="rv-scorecard">
+          <div class="rv-score-item">
+            <div class="rv-score-label"><span>Visibility of User Access Rights</span><span>Manual Management: 15%</span></div>
+            <div class="rv-bar"><div class="rv-fill" style="width:15%;"></div></div>
+          </div>
+
+          <div class="rv-score-item" style="margin-top:10px;">
+            <div class="rv-score-label"><span>Visibility of User Access Rights</span><span>OpenText IAM: 98%</span></div>
+            <div class="rv-bar"><div class="rv-fill" style="width:98%;"></div></div>
+          </div>
+
+          <div style="height:1px;background:rgba(255,255,255,0.08);margin:16px 0;"></div>
+
+          <div class="rv-score-item">
+            <div class="rv-score-label"><span>Speed of Account Provisioning</span><span>Manual Process: 5%</span></div>
+            <div class="rv-bar"><div class="rv-fill" style="width:5%;background:linear-gradient(90deg,#f59e0b,#d97706);"></div></div>
+          </div>
+
+          <div class="rv-score-item" style="margin-top:10px;">
+            <div class="rv-score-label"><span>Speed of Account Provisioning</span><span>Automated Process: 100%</span></div>
+            <div class="rv-bar"><div class="rv-fill" style="width:100%;"></div></div>
+          </div>
+
+          <div style="height:1px;background:rgba(255,255,255,0.08);margin:16px 0;"></div>
+
+          <div class="rv-score-item">
+            <div class="rv-score-label"><span>Audit Report Readiness</span><span>Without IAM System: 30%</span></div>
+            <div class="rv-bar"><div class="rv-fill" style="width:30%;"></div></div>
+          </div>
+
+          <div class="rv-score-item" style="margin-top:10px;">
+            <div class="rv-score-label"><span>Audit Report Readiness</span><span>OpenText IAM: 97%</span></div>
+            <div class="rv-bar"><div class="rv-fill" style="width:97%;"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="deployment">
+    <div class="section-head">
+      <div class="section-label">Deployment Options</div>
+      <h2 class="section-title">Flexible Deployment Options for Your Enterprise<span class="section-title-subline">Cloud, On-Premises, or Hybrid</span></h2>
+      <p class="section-desc">Highly adaptable to support your existing infrastructure, meeting strict internal data security criteria and maximum regulatory compliance.</p>
+    </div>
+
+    <div class="deploy-grid">
+      <div class="deploy-card">
+        <div class="dc-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-protection-lock-shield-ico-72.svg" alt="On-premises icon" loading="lazy"></div>
+        <div class="dc-title">On-Premises</div>
+        <div class="dc-desc">Deploy entirely on your internal data center servers for absolute control over digital sovereignty and 100% data privacy securely.</div>
+        <div class="dc-ideal"><strong>Ideal for:</strong> Government security agencies, state enterprises, or financial institutions with strict data residency regulations natively.</div>
+      </div>
+
+      <div class="deploy-card">
+        <div class="dc-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-protection-lock-network-ico-72.svg" alt="Private cloud icon" loading="lazy"></div>
+        <div class="dc-title">Private Cloud</div>
+        <div class="dc-desc">Utilize a Single-Tenant SaaS environment managed by OpenText. Enjoy hardware-free convenience fully backed by strict SLA agreements reliably.</div>
+        <div class="dc-ideal"><strong>Ideal for:</strong> Modern enterprises seeking agility and reduced server costs while maintaining isolated, dedicated security environments easily.</div>
+      </div>
+
+      <div class="deploy-card">
+        <div class="dc-icon"><img src="https://www.opentext.com/assets/images/shared/opentext-performance-integration-ico-72.svg" alt="Hybrid icon" loading="lazy"></div>
+        <div class="dc-title">Hybrid Deployment</div>
+        <div class="dc-desc">A blended architecture bridging legacy on-premises directories with modern cloud applications, allowing unified security policy control centrally.</div>
+        <div class="dc-ideal"><strong>Ideal for:</strong> Large corporations undergoing gradual cloud transitions, ensuring legacy and modern systems operate together seamlessly globally.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-section" id="contact">
+    <div class="cta-content">
+      <div class="cta-badge">Upgrade Your Identity Security Today</div>
+      <h2 class="cta-title">Ready to secure every <span>Digital Identity</span><br>in your organization?</h2>
+      <p class="cta-desc">
+        For more information, please contact:<br>
+        Busisoft (Thailand) Co., Ltd.<br>
+        Phayathai Plaza Building, Phayathai Rd, Ratchathewi, Bangkok 10400
+      </p>
+
+      <div class="cta-boxes-container">
+        <a href="tel:021293970" class="cta-contact-box">
+          <div class="box-icon">
+            <svg class="line-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M6.5 4C5.1 4 4 5.1 4 6.5C4 14.5 9.5 20 17.5 20C18.9 20 20 18.9 20 17.5V14.9C20 14.1 19.5 13.4 18.7 13.1L16.2 12.2C15.4 11.9 14.6 12.2 14.1 12.8L13.2 13.9C11.3 13 10 11.7 9.1 9.8L10.2 8.9C10.8 8.4 11.1 7.6 10.8 6.8L9.9 4.3C9.6 3.5 8.9 4 8.1 4H6.5Z" stroke="#00aeef" stroke-width="1.5" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+          <div class="box-text">0-2129-3970</div>
+        </a>
+
+        <a href="mailto:bs_sales@busisoft.co.th" class="cta-contact-box">
+          <div class="box-icon">
+            <svg class="line-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2" stroke="#00aeef" stroke-width="1.5"></rect>
+              <path d="M3 8L12 13L21 8" stroke="#00aeef" stroke-width="1.5" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+          <div class="box-text">bs_sales@busisoft.co.th</div>
+        </a>
+
+        <a href="https://lin.ee/wjmAPJcC" class="cta-contact-box">
+          <div class="box-icon">
+            <svg class="line-icon-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="24" height="24" rx="6" fill="#06C755"></rect>
+              <path d="M20 11.26C20 7.8 16.42 5 12 5C7.58 5 4 7.8 4 11.26C4 14.34 6.76 16.93 10.53 17.43C10.79 17.48 11.15 17.59 11.24 17.81C11.33 18.01 11.3 18.32 11.27 18.52C11.27 18.52 11.17 19.08 11.15 19.19C11.11 19.39 10.98 19.95 12 19.51C13.02 19.07 17.5 16.31 19.44 14.09C20.72 12.68 20 12.07 20 11.26Z" fill="white"></path>
+              <path d="M10.19 9.78H9.54C9.43 9.78 9.34 9.87 9.34 9.98V13.55C9.34 13.66 9.43 13.75 9.54 13.75H10.19C10.3 13.75 10.39 13.66 10.39 13.55V9.98C10.39 9.87 10.3 9.78 10.19 9.78Z" fill="#06C755"></path>
+              <path d="M14.46 9.78H13.81C13.7 9.78 13.61 9.87 13.61 9.98V12.1L11.96 9.85C11.95 9.84 11.94 9.83 11.93 9.82C11.92 9.81 11.91 9.81 11.9 9.8C11.89 9.79 11.88 9.79 11.87 9.79C11.86 9.79 11.85 9.78 11.84 9.78H11.19C11.08 9.78 10.99 9.87 10.99 9.98V13.55C10.99 13.66 11.08 13.75 11.19 13.75H11.84C11.95 13.75 12.04 13.66 12.04 13.55V11.44L13.7 13.69C13.72 13.72 13.75 13.74 13.77 13.75H13.81C13.92 13.75 14.01 13.66 14.01 13.55V9.98C14.01 9.87 13.92 9.78 13.81 9.78H14.46Z" fill="#06C755"></path>
+              <path d="M8.71 12.7H7.31V9.98C7.31 9.87 7.22 9.78 7.11 9.78H6.46C6.35 9.78 6.26 9.87 6.26 9.98V13.55C6.26 13.6 6.28 13.64 6.31 13.67C6.34 13.7 6.38 13.72 6.43 13.72H8.71C8.82 13.72 8.91 13.63 8.91 13.52V12.87C8.91 12.8 8.82 12.7 8.71 12.7Z" fill="#06C755"></path>
+              <path d="M17.57 10.83C17.68 10.83 17.77 10.74 17.77 10.63V9.98C17.77 9.87 17.68 9.78 17.57 9.78H15.29C15.24 9.78 15.2 9.8 15.17 9.83C15.14 9.86 15.12 9.9 15.12 9.95V13.52C15.12 13.57 15.14 13.61 15.17 13.64C15.2 13.67 15.24 13.69 15.29 13.69H17.57C17.68 13.69 17.77 13.6 17.77 13.49V12.84C17.77 12.73 17.68 12.64 17.57 12.64H16.17V12.06H17.57C17.68 12.06 17.77 11.97 17.77 11.86V11.21C17.77 11.1 17.68 11.01 17.57 11.01H16.17V10.83H17.57Z" fill="#06C755"></path>
+            </svg>
+          </div>
+          <div class="box-text">Line: @busisoft</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="site-footer__grid">
+    <div class="site-footer__brand">
+      <img src="./bs-logo.png" alt="BusiSoft (Thailand) Co., Ltd.">
+      <p>Be a long-term consulting partner with customers by providing an IT Professional Services &amp; a Net Business Security Infrastructure Solutions to fulfill customers business goals &amp; objectives.</p>
+    </div>
+
+    <div>
+      <h3>Social Media</h3>
+      <div class="site-footer__social">
+        <a href="https://www.facebook.com/busisoftthai" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M13.5 21V13.7H16l.38-2.86H13.5V8.99c0-.83.24-1.39 1.43-1.39h1.53V5.04c-.27-.03-1.18-.11-2.24-.11-2.22 0-3.74 1.36-3.74 3.84v2.07H8v2.86h2.48V21h3.02Z"></path>
+          </svg>
+        </a>
+        <a href="https://lin.ee/wjmAPJcC" aria-label="Line">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.98 10.25c0-4.4-4.41-7.98-9.83-7.98S1.32 5.84 1.32 10.25c0 3.95 3.5 7.26 8.22 7.88.32.07.76.22.87.5.1.26.07.67.03.93l-.14.84c-.05.25-.21.98.85.53 1.06-.45 5.73-3.38 7.81-5.79h.01c1.44-1.58 2.01-3.18 2.01-4.89Zm-13.75 2.1H5.28V8.1h1.95v4.25Zm2.42 0c0 .14-.11.25-.25.25H7.78V8.1h1.95v3.75h1.73v.5Zm4.02 0H11.7c-.14 0-.25-.11-.25-.25V8.1c0-.14.11-.25.25-.25h1.97v.49h-1.72v1.03h1.72v.49h-1.72v1.03h1.72v.49Zm4.58 0h-.59c-.09 0-.18-.05-.22-.13l-1.72-2.35v2.23h-.49V8.1h.59c.09 0 .18.05.22.13l1.72 2.35V8.1h.49v4.25Z"></path>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/busisoft_official/" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7.5 3h9A4.5 4.5 0 0 1 21 7.5v9a4.5 4.5 0 0 1-4.5 4.5h-9A4.5 4.5 0 0 1 3 16.5v-9A4.5 4.5 0 0 1 7.5 3Zm0 1.8A2.7 2.7 0 0 0 4.8 7.5v9a2.7 2.7 0 0 0 2.7 2.7h9a2.7 2.7 0 0 0 2.7-2.7v-9a2.7 2.7 0 0 0-2.7-2.7h-9Zm9.45 1.35a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1ZM12 7.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5Zm0 1.8A2.7 2.7 0 1 0 14.7 12 2.7 2.7 0 0 0 12 9.3Z"></path>
+          </svg>
+        </a>
+        <a href="https://youtube.com/@busisoftthailand7568?si=hoiZJOaNA30s60cs" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21.58 7.19a2.96 2.96 0 0 0-2.08-2.09C17.67 4.6 12 4.6 12 4.6s-5.67 0-7.5.5A2.96 2.96 0 0 0 2.42 7.2C1.92 9.02 1.92 12 1.92 12s0 2.98.5 4.8a2.96 2.96 0 0 0 2.08 2.09c1.83.5 7.5.5 7.5.5s5.67 0 7.5-.5a2.96 2.96 0 0 0 2.08-2.09c.5-1.82.5-4.8.5-4.8s0-2.98-.5-4.81ZM10.2 15.4V8.6L15.8 12l-5.6 3.4Z"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="https://busisoft.co.th/about-us/">About Us</a></li>
+        <li><a href="https://busisoft.co.th/support/">Support</a></li>
+        <li><a href="https://busisoft.co.th/contact/">Contact</a></li>
+        <li><a href="https://busisoft.co.th/privacy-policy/">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="site-footer__bottom">
+    &copy; Copyright 2025 Busisoft (Thailand) Company Limited. All rights reserved.
+  </div>
+</footer>
+</body>
+</html>
