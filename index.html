@@ -73,6 +73,32 @@
     height: auto;
   }
 
+  .nav-toggle {
+    display: none;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    color: #182334;
+    cursor: pointer;
+  }
+
+  .nav-toggle__bar {
+    display: block;
+    width: 24px;
+    height: 2.5px;
+    margin: 0;
+    border-radius: 999px;
+    background: currentColor;
+    transition: transform 0.22s ease, opacity 0.22s ease;
+  }
+
   .site-nav {
     display: flex;
     align-items: center;
@@ -109,12 +135,36 @@
   }
 
   .site-lang {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     padding: 12px 18px;
     border-radius: 14px;
     background: #f1f4f8;
     color: #2d3748;
     font-size: 14px;
     font-weight: 500;
+  }
+
+  .site-lang__flag {
+    width: 18px;
+    height: 12px;
+    border-radius: 2px;
+    box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.08);
+    background:
+      linear-gradient(
+        180deg,
+        #d91f26 0%,
+        #d91f26 16.66%,
+        #ffffff 16.66%,
+        #ffffff 33.33%,
+        #1f4aa8 33.33%,
+        #1f4aa8 66.66%,
+        #ffffff 66.66%,
+        #ffffff 83.33%,
+        #d91f26 83.33%,
+        #d91f26 100%
+      );
   }
 
   .page-shell {
@@ -1103,8 +1153,7 @@
     .site-header__inner {
       min-height: auto;
       padding: 16px 0;
-      flex-direction: column;
-      align-items: flex-start;
+      gap: 20px;
     }
 
     .site-nav {
@@ -1113,6 +1162,86 @@
   }
 
   @media (max-width: 760px) {
+    .site-header__inner {
+      width: min(100%, calc(100% - 22px));
+      min-height: 74px;
+      padding: 10px 0;
+      gap: 10px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+    }
+
+    .brand img {
+      width: 72px;
+    }
+
+    .nav-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      justify-self: start;
+    }
+
+    .site-header.is-nav-open .nav-toggle__bar:nth-child(1) {
+      transform: translateY(6.5px) rotate(45deg);
+    }
+
+    .site-header.is-nav-open .nav-toggle__bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .site-header.is-nav-open .nav-toggle__bar:nth-child(3) {
+      transform: translateY(-6.5px) rotate(-45deg);
+    }
+
+    .site-nav {
+      display: none;
+      grid-column: 1 / -1;
+      width: 100%;
+      margin-top: 4px;
+      padding: 10px 0 4px;
+      border-top: 1px solid rgba(40, 72, 255, 0.08);
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 0;
+      font-size: 14px;
+      line-height: 1.2;
+    }
+
+    .site-header.is-nav-open .site-nav {
+      display: flex;
+    }
+
+    .site-nav a {
+      width: 100%;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(40, 72, 255, 0.08);
+    }
+
+    .site-nav a:last-child {
+      width: auto;
+      margin-top: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: #edf4ff;
+      color: var(--brand-dark);
+      border-bottom: 0;
+    }
+
+    .site-nav a:last-child::after {
+      display: none;
+    }
+
+    .site-lang {
+      justify-self: end;
+      padding: 8px 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1;
+    }
+
     .hero,
     section,
     .cta-section,
@@ -1160,6 +1289,25 @@
   }
 
   @media (max-width: 560px) {
+    .brand img {
+      width: 66px;
+    }
+
+    .site-nav {
+      font-size: 13px;
+    }
+
+    .site-nav a:last-child {
+      padding: 8px 13px;
+      font-size: 13px;
+    }
+
+    .site-lang {
+      gap: 6px;
+      padding: 7px 10px;
+      font-size: 12px;
+    }
+
     .sol-features-grid,
     .challenges-grid,
     .architecture-grid,
@@ -1187,17 +1335,25 @@
 <body>
 <header class="site-header">
   <div class="site-header__inner">
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
     <a class="brand" href="https://busisoft.co.th/home/">
       <img src="./bs-logo.png" alt="BusiSoft (Thailand) Co., Ltd.">
     </a>
-    <nav class="site-nav" aria-label="Primary">
+    <nav class="site-nav" id="site-nav" aria-label="Primary">
       <a href="https://busisoft.co.th/home/">Home</a>
       <a href="https://busisoft.co.th/about-us/">About Us</a>
       <a href="https://busisoft.co.th/opentext-identity-manager/" class="is-active">Product</a>
       <a href="https://busisoft.co.th/contact/">Contact</a>
       <a href="#contact">Talk to Sales</a>
     </nav>
-    <a class="site-lang" href="https://busisoft.co.th/home/">Thai</a>
+    <a class="site-lang" href="https://busisoft.co.th/home/">
+      <span class="site-lang__flag" aria-hidden="true"></span>
+      <span>ไทย</span>
+    </a>
   </div>
 </header>
 
@@ -1844,5 +2000,38 @@
     &copy; Copyright 2025 Busisoft (Thailand) Company Limited. All rights reserved.
   </div>
 </footer>
+<script>
+  (function () {
+    var header = document.querySelector('.site-header');
+    var toggle = document.querySelector('.nav-toggle');
+    var nav = document.getElementById('site-nav');
+    if (!header || !toggle || !nav) return;
+
+    var mobileQuery = window.matchMedia('(max-width: 760px)');
+
+    function setOpenState(isOpen) {
+      header.classList.toggle('is-nav-open', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    }
+
+    toggle.addEventListener('click', function () {
+      setOpenState(!header.classList.contains('is-nav-open'));
+    });
+
+    nav.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        if (mobileQuery.matches) setOpenState(false);
+      });
+    });
+
+    function syncHeaderState() {
+      if (!mobileQuery.matches) setOpenState(false);
+    }
+
+    window.addEventListener('resize', syncHeaderState);
+    syncHeaderState();
+  })();
+</script>
 </body>
 </html>
